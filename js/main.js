@@ -4,7 +4,7 @@ alert("¡Bienvenidx a FastFeed!\n\ \n\ Vamos a tomar su orden.\n\ Siga los pasos
 
 let total_a_pagar = 0
 
-function tomar_orden() {
+function tomarOrden() {
 
     let comida
     do {
@@ -81,7 +81,7 @@ function tomar_orden() {
 
 let decision
 do {
-    tomar_orden()
+    tomarOrden()
     decision = prompt("¿Desea realizar otra orden (si/no)?")
     if (decision === null) {
         decision = "no"
