@@ -2,9 +2,10 @@
 alert("¡Bienvenidx a FastFeed!\n\ \n\ Vamos a tomar su orden.\n\ Siga los pasos hasta completar el pedido.")
 
 
-let totalAPagar = 0
+let pedido = []
 
 function tomarOrden() {
+    let totalPedido = 0
 
     let menuComida
     do {
@@ -18,15 +19,15 @@ function tomarOrden() {
         switch (menuComida) {
             case 1:
                 console.log("Agregado: hamburguesa completa")
-                totalAPagar += 3000
+                totalPedido += 3000
                 break
             case 2:
                 console.log("Agregado: churrasquito caramelizado")
-                totalAPagar += 4500
+                totalPedido += 4500
                 break
             case 3:
                 console.log("Agregado: menu vegano")
-                totalAPagar += 5000
+                totalPedido += 5000
                 break
             case 4:
                 break
@@ -36,7 +37,6 @@ function tomarOrden() {
 
     } while (menuComida < 1 || menuComida > 4 || isNaN(menuComida))
 
-    
     let menuBebida
     do {
         menuBebida = parseInt(prompt("Seleccione Bebida: \n\
@@ -48,15 +48,15 @@ function tomarOrden() {
         switch (menuBebida) {
             case 1:
                 console.log("Agregado: gaseosa")
-                totalAPagar += 1000
+                totalPedido += 1000
                 break
             case 2:
                 console.log("Agregado: agua sin gas")
-                totalAPagar += 800
+                totalPedido += 800
                 break
             case 3:
                 console.log("Agregado: jugo exprimido")
-                totalAPagar += 1500
+                totalPedido += 1500
                 break
             case 4:
                 break
@@ -65,18 +65,25 @@ function tomarOrden() {
         }
     } while (menuBebida < 1 || menuBebida > 4 || isNaN(menuBebida))
 
-    if (menuComida != 4 || menuBebida != 4){
+
+    if (menuComida != 4 || menuBebida != 4) {
         let extra = prompt("¿Desea agrandar el combo por $500?")
-            if (extra === null){
-                extra = "no"
-            }
-            if (extra == "" || extra.toLowerCase() === "si") {
-                console.log("Combo agrandado")
-                totalAPagar += 500
-            } else {
-                console.log("Tamaño regular")
-            }
+        if (extra === null) {
+            extra = "no"
         }
+        if (extra == "" || extra.toLowerCase() === "si") {
+            console.log("Combo agrandado")
+            totalPedido += 500
+        } else {
+            console.log("Tamaño regular")
+        }
+    }
+    let pedidoAgregar = {
+        comida: menuComida,
+        bebida: menuBebida,
+        importe: totalPedido
+    }
+    pedido.push(pedidoAgregar)
 }
 
 let decision
@@ -89,7 +96,15 @@ do {
 } while (decision.toLowerCase() != "no")
 
 
-console.log("Total:")
-console.log(totalAPagar)
+function calcularTotal() {
+        let totalAPagar = pedido.reduce((valorTotal, pedido) => valorTotal + pedido.importe, 0)
+        return totalAPagar
+    }
 
-alert("El total de su pedido es de: $" + totalAPagar.toString())
+let importeTotal = calcularTotal()
+
+console.log("Total: ")
+
+console.log(importeTotal)
+
+alert("El total de su pedido es de: $" + importeTotal.toString())
