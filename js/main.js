@@ -2,16 +2,17 @@
 alert("¡Bienvenidx a FastFeed!\n\ \n\ Vamos a tomar su orden.\n\ Siga los pasos hasta completar el pedido.")
 
 // array donde se almacenaran los pedidos
-let pedido = []
+let pedidos = []
 
 // funcion que pide al usuario seleccionar su menu
 function tomarOrden() {
 
-    // variable para almacenar el precio total por orden
+    // variables para almacenar el menu elegido y el precio total por orden
+    let comidaElegida = 0
     let totalPedido = 0
 
     let menuComida
-    // pedimos al usuario que ingrese opcion siempre y cuando sea una de las disponibles
+    // pedimos al usuario que ingrese opcion (siempre y cuando sea una de las disponibles)
     do {
         menuComida = parseInt(prompt("Seleccione Comida: \n\
         1. Hamburguesa Completa -> $3000\n\
@@ -21,26 +22,28 @@ function tomarOrden() {
         Cada opcion incluye guarnición de papas"))
 
         switch (menuComida) {
-            // mostramos la opcion por consola y sumamos el precio al total de este pedido
+            // asignamos la opcion a la variable creada al principio y sumamos el precio al total de este pedido
             case 1:
-                console.log("Agregado: hamburguesa completa")
+                comidaElegida ="Hamburguesa Completa"
                 totalPedido += 3000
                 break
             case 2:
-                console.log("Agregado: churrasquito caramelizado")
+                comidaElegida ="Churrasquito Caramelizado"
                 totalPedido += 4500
                 break
             case 3:
-                console.log("Agregado: menu vegano")
+                comidaElegida ="Menu Vegano"
                 totalPedido += 5000
                 break
             case 4:
+                comidaElegida="Sin comida"
                 break
             default:
-                console.log("La opcion elegida no es valida.")
+                alert("La opcion elegida no es valida.")
         }
     } while (menuComida < 1 || menuComida > 4 || isNaN(menuComida))
 
+    let bebidaElegida
     let menuBebida
     // repetimos para la bebida
     do {
@@ -52,21 +55,22 @@ function tomarOrden() {
 
         switch (menuBebida) {
             case 1:
-                console.log("Agregado: gaseosa")
+                bebidaElegida="Gaseosa"
                 totalPedido += 1000
                 break
             case 2:
-                console.log("Agregado: agua sin gas")
+                bebidaElegida="Agua sin gas"
                 totalPedido += 800
                 break
             case 3:
-                console.log("Agregado: jugo exprimido")
+                bebidaElegida="Jugo exprimido"
                 totalPedido += 1500
                 break
             case 4:
+                bebidaElegida="Sin bebida"
                 break
             default:
-                console.log("la opcion elegida no es valida")
+                alert("la opcion elegida no es valida")
         }
     } while (menuBebida < 1 || menuBebida > 4 || isNaN(menuBebida))
 
@@ -79,20 +83,21 @@ function tomarOrden() {
             extra = "no"
         }
         if (extra == "" || extra.toLowerCase() === "si") {
-            console.log("Combo agrandado")
+            tamanioCombo = "Combo agrandado"
             totalPedido += 500
         } else {
-            console.log("Tamaño regular")
+            tamanioCombo = "Tamaño regular"
         }
     }
 
-    // por ultimo, agregamos las opciones elegidas (comida, bebida y total por pedido) al array de pedidos 
+    // por ultimo, agregamos las opciones elegidas (comida, bebida, extra y total por pedido) al array de pedidos 
     let pedidoAgregar = {
-        comida: menuComida,
-        bebida: menuBebida,
+        comida: comidaElegida,
+        bebida: bebidaElegida,
+        tamanio: tamanioCombo,
         importe: totalPedido
     }
-    pedido.push(pedidoAgregar)
+    pedidos.push(pedidoAgregar)
 }
 
 // funcion principal (corre al iniciarse) - 
@@ -112,12 +117,23 @@ do {
 
 // funcion que calcula el monto total de las ordenes realizadas para mostrar al usuario el importe a pagar.
 function calcularTotal() {
-    let totalAPagar = pedido.reduce((valorTotal, pedido) => valorTotal + pedido.importe, 0)
+    // HOF - metodo reduce para acumular todos los importes del array en un valor total
+    let totalAPagar = pedidos.reduce((valorTotal, pedidos) => valorTotal + pedidos.importe, 0)
     return totalAPagar
 }
 
+// alert para mostrar el fin del simulador
+alert("Revise la consola para ver el detalle de su pedido.")
+
+// mostramos el detalle
+console.log("Detalle de su pedido: \n")
+// iniciamos contador en 0 para mostrar el nro de orden
+let count=0
+pedidos.forEach((orden) => {
+    count ++
+    console.log("Pedido n° ",count,"\n",orden.comida,"\n",orden.bebida,"\n",orden.tamanio,"\n","$"+orden.importe)
+})
+
+// llamos a la funcion para calcular el toal y lo mostramos al final del detalle
 let importeTotal = calcularTotal()
-
-console.log("Total a abonar: ", importeTotal)
-
-alert("El total de su pedido es de: $" + importeTotal.toString())
+console.log("El total de su pedido es de: $" + importeTotal.toString())
