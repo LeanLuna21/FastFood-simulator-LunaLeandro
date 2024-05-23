@@ -8,7 +8,7 @@ let pedidos = []
 function tomarOrden() {
 
     // variables para almacenar el menu elegido y el precio total por orden
-    let comidaElegida = 0
+    let comidaElegida
     let totalPedido = 0
 
     let menuComida
@@ -37,6 +37,7 @@ function tomarOrden() {
                 break
             case 4:
                 comidaElegida="Sin comida"
+                totalPedido += 0
                 break
             default:
                 alert("La opcion elegida no es valida.")
@@ -68,6 +69,7 @@ function tomarOrden() {
                 break
             case 4:
                 bebidaElegida="Sin bebida"
+                totalPedido += 0
                 break
             default:
                 alert("la opcion elegida no es valida")
@@ -75,6 +77,7 @@ function tomarOrden() {
     } while (menuBebida < 1 || menuBebida > 4 || isNaN(menuBebida))
 
     // si el usuario realizo algun pedido, ya sea comida o gaseosa
+    let tamanioCombo = "-"
     if (menuComida != 4 || menuBebida != 4) {
         // preguntamos si desea agrandar su orden
         let extra = prompt("¿Desea agrandar el combo por $500?")
@@ -122,18 +125,42 @@ function calcularTotal() {
     return totalAPagar
 }
 
-// alert para mostrar el fin del simulador
-alert("Revise la consola para ver el detalle de su pedido.")
-
-// mostramos el detalle
-console.log("Detalle de su pedido: \n")
+// modificamos el dom con los menu seleccionados para finalizar
 // iniciamos contador en 0 para mostrar el nro de orden
-let count=0
-pedidos.forEach((orden) => {
-    count ++
-    console.log("Pedido n° ",count,"\n",orden.comida,"\n",orden.bebida,"\n",orden.tamanio,"\n","$"+orden.importe)
+count=0
+let contenedorPedidos = document.querySelector("#contenedor-pedidos")
+
+// iteramos el array pedidos
+pedidos.forEach(pedido =>{
+    // creamos una lista con un item
+    let pedidosLista = document.createElement("ul")
+    pedidosLista.classList.add("lista-pedido")
+    
+    let pedidoItem = document.createElement("li")
+    pedidoItem.classList.add("item-pedido")
+
+    // a ese item le damos la estructura html
+    pedidoItem.innerHTML += `
+        <span> Pedido ${++ count} </span>
+        <p>${pedido.comida}</p>
+        <p>${pedido.bebida}</p>
+        <p>${pedido.tamanio}</p>
+        <p>$${pedido.importe}</p>
+    `
+    // agregamos el item a la lista
+    pedidosLista.append(pedidoItem)
+
+    // agregamos la lista a la seccion contenedora
+    contenedorPedidos.append(pedidosLista)
 })
 
-// llamos a la funcion para calcular el toal y lo mostramos al final del detalle
-let importeTotal = calcularTotal()
-console.log("El total de su pedido es de: $" + importeTotal.toString())
+// creamos un div en el main que contendra el total del pedido
+let mainContent = document.querySelector("#content")
+let contenedorImporteTotal = document.createElement("div")
+contenedorImporteTotal.classList.add("contenedor-importe-total")
+contenedorImporteTotal.innerText = "El total de su pedido es de: $" + calcularTotal()
+
+// appendeamos ese div al main
+mainContent.append(contenedorImporteTotal)
+
+alert("¡Gracias por confiar en FastFeed!")
