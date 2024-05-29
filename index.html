@@ -5,23 +5,215 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FastFeed</title>
+    <!-- bootstrap styles -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="./css/styles.css">
     <link rel="shortcut icon" href="./assets/icons/hamburguesa.png" type="image/x-icon">
 </head>
 
 <body>
-    <nav>
+    <!-- top navigation bar -->
+    <header>
+        <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="index.html">
+                    <img src="./assets/icons/hamburguesa.png" alt="FastFeed-logo" width="30">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 align-items-center">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+                        </li>
+                        <!-- <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Dropdown
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="#">Action</a></li>
+                                <li><a class="dropdown-item" href="#">Another action</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            </ul>
+                        </li> -->
+                        <li class="nav-item">
+                            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Mis pedidos</a>
+                        </li>
+                        <a class="btn btn-warning m-2" href="#start-order"> PROCEED TO ORDER<i
+                                class="fas fa-chevron-right ms-2"></i></a>
+                    </ul>
+                    <span class="navbar-text text-muted d-none d-lg-block me-3">
+                        Fast-food, <b>faster</b>.
+                    </span>
+                    <button id="color-mode"><i id="color-mode-icon" class="fa-regular fa-lightbulb"></i></button>
+                </div>
+            </div>
 
-    </nav>
-    <main id="content">
-        <h1 class="title"> Fast-Food Cashier Bot</h1>
-        <h4 class="subtitle"> Aqui esta el detalle de su pedido: </h4>
-        <section id="contenedor-pedidos">
-            
+        </nav>
+    </header> <!-- top navigation bar -->
+
+    <!-- 3 columns main content -->
+    <main class="row m-0">
+        <aside class="col-sm-0 col-lg-1"></aside>
+
+        <!-- main content sections: carousel/menu-products/cart -->
+        <article class="col-sm-12 col-lg-10">
+
+            <!-- carousel -->
+            <section id="mainCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="0" class="active"
+                        aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="1"
+                        aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="2"
+                        aria-label="Slide 3"></button>
+                </div>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="./assets/icons/banner-1.png" class="d-block w-100" alt="promo-menu">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="./assets/icons/banner-2.png" class="d-block w-100" alt="delicias-banner">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="./assets/icons/banner-3.png" class="d-block w-100" alt="vegan-menu-available">
+                    </div>
+                </div>
+                <button class="carousel-control-prev p-auto" type="button" data-bs-target="#mainCarousel"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next p-auto" type="button" data-bs-target="#mainCarousel"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </section> <!-- fin carousel -->
+
+            <!-- menu comidas (js) -->
+            <div id="start-order"> </div>
+            <h1 class="title">Elegi tu comida:</h1>
+            <section id="menu-comidas" class="menu-options">
+            </section>
+
+            <!-- menu bebidas (js) -->
+            <h1 class="title">Elegi tu bebida:</h1>
+            <section id="menu-bebidas" class="menu-options">
+            </section>
+
+            <!-- carrito -->
+            <section id="seccion-carrito">
+                <h2 class="subtitle">Detalle de tu orden:</h2>
+                <section id="content">
+
+                    <!-- detalle de pedidos realizados -->
+                    <section id="contenedor-pedidos">
+
+                    </section>
+
+                    <div class="contenedor-importe-total">
+
+                    </div>
+                </section>
+            </section>
+
+        </article> <!-- main article content end -->
+
+        <aside class="col-sm-0 col-lg-1"></aside>
+    </main> <!-- main content end -->
+
+    <!-- footer -->
+    <footer class="bg-dark">
+        <section class="pt-5 mt-3">
+            <div class="container mx-auto">
+
+                <div class="row justify-content-evenly">
+                    <div class="col-6 col-md-4 col-lg-3 col-xxl-2 mb-3 ps-5">
+                        <h5 class="lh-lg fw-bold text-white">COMPANY</h5>
+                        <ul class="list-unstyled mb-md-4 mb-lg-0">
+                            <li class="lh-lg"><a class="text-200 text-decoration-none" href="#!">About Us</a></li>
+                            <li class="lh-lg"><a class="text-200 text-decoration-none" href="#!">Team</a></li>
+                            <!-- <li class="lh-lg"><a class="text-200 text-decoration-none" href="#!">blog</a></li> -->
+                        </ul>
+                    </div>
+                    <div class="col-6 col-md-4 col-lg-2 col-xxl-2 mb-3 ps-5">
+                        <h5 class="lh-lg fw-bold text-white">CONTACT</h5>
+                        <ul class="list-unstyled mb-md-4 mb-lg-0">
+                            <li class="lh-lg"><a class="text-200 text-decoration-none" href="#!">Help &amp; Support</a>
+                            </li>
+                            <!-- <li class="lh-lg"><a class="text-200 text-decoration-none" href="#!">Suscribe!</a></li> -->
+                        </ul>
+                    </div>
+                    <div class="col-12 col-md-4 col-lg-2 col-xxl-2 mb-3 ps-5">
+                        <h5 class="lh-lg fw-bold text-white">LEGAL</h5>
+                        <ul class="list-unstyled mb-md-4 mb-lg-0">
+                            <li class="lh-lg"><a class="text-200 text-decoration-none" href="#!">Terms &amp;
+                                    Conditions</a></li>
+                            <li class="lh-lg"><a class="text-200 text-decoration-none" href="#!">Refund &amp;
+                                    Cancellation</a></li>
+                            <li class="lh-lg"><a class="text-200 text-decoration-none" href="#!">Privacy Policy</a></li>
+                            <li class="lh-lg"><a class="text-200 text-decoration-none" href="#!">Cookie Policy</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-12 col-md-12 col-lg-5 col-xxl-7 ms-0 ps-5">
+                        <h5 class="lh-lg fw-bold text-500 text-white">FOLLOW US</h5>
+                        <div class="text-start my-3">
+                            <a class="px-2" href="#!">
+                                <i class="fa-brands fa-instagram"></i></a>
+                            <a class="px-2" href="#!">
+                                <i class="fa-brands fa-facebook"></i></a>
+                            <a class="px-2" href="#!">
+                                <i class="fa-brands fa-x-twitter"></i></a>
+                        </div>
+
+                        <h3 class="text-500 my-4">Receive exclusive offers and discounts in your mailbox</h3>
+                        <div class="row input-group-icon mb-5">
+                            <div class="col-auto position-relative mx-3 my-3">
+                                <i
+                                    class="fas fa-envelope input-box-icon text-white text-500 position-absolute top-50 start-50 translate-middle"></i>
+                            </div>
+                            <div class="col-auto my-3">
+                                <input class="form-control input-box bg-800 border-0" type="email"
+                                    placeholder="Enter Email" aria-label="email" />
+                            </div>
+                            <div class="col-auto my-3">
+                                <button class="btn btn-light" type="submit">Subscribe</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <p class="text-200 text-center text-white pb-5">All rights Reserved &copy; FastFeed, 2024</p>
+                    </div>
+                </div>
+
+            </div><!-- end of container-->
         </section>
-        
-    </main>
-    <script src="./js/main.js"></script>
+    </footer> <!-- fin seccion footer -->
+
+    <!-- bootstrap script -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+    <!-- icons script -->
+    <script src="https://kit.fontawesome.com/1dcfa36bb4.js" crossorigin="anonymous"></script>
+
+    <!-- my script -->
+    <script src="./js/menu.js"></script>
+
 </body>
 
 </html>
