@@ -80,13 +80,13 @@
   width: 40%;
 }
 
-.menu-card-info button:hover, .eliminar-orden:hover {
+.menu-card-info button:hover {
   background-color: #191919;
   color: #eee;
   box-shadow: 1px 1px 5px #474747;
 }
 
-.price-button {
+.menu-options .price-button {
   display: inline-flex;
   width: 100%;
   align-items: center!important;
@@ -94,14 +94,9 @@
 }
 
 /* css headings & carrito */
-#content {
-  padding: 2rem;
-  margin-bottom: 2rem;
-}
-
 #contenedor-pedidos {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(15rem, 0.2fr));
+  grid-template-columns: 1fr;
   gap: 20px;
   padding: 2rem;
   justify-content: center;
@@ -115,7 +110,34 @@
   border-radius: 0.8rem;
   box-shadow: 10px 10px 10px 0 rgba(0, 0, 0, 0.1);
   color: black;
-  flex-grow: 1;
+}
+#contenedor-pedidos .lista-pedido:hover{
+  background-color: rgb(245, 226, 84);
+}
+
+.item-pedido {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.item-pedido p{
+  margin: 0;
+  width: 15%;
+  text-align: center;
+}
+.item-pedido p:first-of-type{
+  font-weight: 700;
+  width: 40%;
+}
+.item-pedido p:nth-of-type(2){
+  width: 5%;
+}
+
+#contenedor-pedidos .price-button {
+  display: inline-flex;
+  width: 20%;
+  align-items: center!important;
+  justify-content: space-between;
 }
 
 .title,
@@ -125,14 +147,25 @@
   margin-top: 4rem;
   background-color: rgba(0, 0, 0, 0.752);
   padding: 1rem;
-  grid-column: 1/3;
   border-radius: 0.8rem;
   box-shadow: 10px 10px 10px 0 rgba(0, 0, 0, 0.1);
   color: rgb(226, 243, 100);
   flex-grow: 1;
 }
-
-
+.contenedor-importe-total{
+  margin-bottom: 4rem;
+}
+.contenedor-importe-total p{
+  margin: 0;
+}
+.eliminar-orden{
+  min-width: 25%
+}
+.eliminar-orden:hover{
+  background-color: #f12626;
+  color: #eee;
+  box-shadow: 1px 1px 5px #6f1414;
+}
 .subtitle {
   background-color: rgba(246, 225, 62, 0.752);
   color: rgb(5, 5, 5);
@@ -142,6 +175,29 @@
   visibility: hidden;
   height:100px;
 }
+
+
+@media (max-width:660px) {
+  #contenedor-pedidos{
+    padding: 0.5rem;
+  }
+  #contenedor-pedidos .lista-pedido{
+    padding-left: 0.3rem;
+    padding-right: 0.3rem;
+  }
+  #contenedor-pedidos .item-pedido{
+    justify-content: space-between;
+  }
+  #contenedor-pedidos .price-button {
+    width: 40%;
+    justify-content: space-around;
+  }
+  #contenedor-pedidos .price-button button {
+    width: 20%;
+  }
+} 
+
+/* css footer */
 
 footer a, footer h3{
   color: rgb(244, 192, 24);
