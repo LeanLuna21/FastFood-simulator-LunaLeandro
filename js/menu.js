@@ -3,56 +3,56 @@ const comidas = [
         id: 'ffprod-202402',
         name: 'Hamburguesa Completa',
         price: 6.99,
-        img: './assets/icons/hamburguesa.png',
+        img: 'https://cache-backend-mcd.mcdonaldscupones.com/media/image/product$kqXXaUUP/200/200/original?country=ar',
         description: 'Una jugosa hamburguesa de res con queso derretido, lechuga, tomate y pepinillos en un pan tostado.'
     },
     {
         id: 'ffprod-202403',
         name: 'Nuggets de Pollo',
         price: 4.49,
-        img: 'https://picsum.photos/200/300?random=2',
+        img: 'https://cache-backend-mcd.mcdonaldscupones.com/media/image/product$kcX2hh1W/200/200/original?country=ar',
         description: 'Crujientes nuggets de pollo dorados, servidos con la salsa de tu elección.'
     },
     {
         id: 'ffprod-202404',
         name: 'Hamburguesa Vegana',
         price: 6.49,
-        img: 'https://picsum.photos/200/300?random=3',
+        img: 'https://s3-eu-central-1.amazonaws.com/www.burgerking.com.ar.v2/wp-media-folder-burger-king-argentina//home/ubuntu/preview/menu-app/frontend/apps/marketing-website-wordpress-app/web/app/uploads/sites/5/WhopperVegetal_2604.png',
         description: 'Una deliciosa hamburguesa de lentejas con vegetales frescos y una salsa picante.'
     },
     {
         id: 'ffprod-202405',
         name: 'Ensalada César',
         price: 5.49,
-        img: 'https://picsum.photos/200/300?random=5',
+        img: 'https://cache-backend-mcd.mcdonaldscupones.com/media/image/product$kEXXe08B/200/200/original?country=ar',
         description: 'Lechuga romana fresca, crutones, queso parmesano y aderezo César.'
     },
     {
         id: 'ffprod-202407',
         name: 'Sandwich de Pollo',
         price: 6.99,
-        img: 'https://picsum.photos/200/300?random=6',
+        img: 'https://cache-backend-mcd.mcdonaldscupones.com/media/image/product$ktXfGUzp/200/200/original?country=ar',
         description: 'Pechuga de pollo a la parrilla con lechuga, tomate y mayonesa en un pan tostado.'
     },
     {
         id: 'ffprod-202413',
         name: 'Hamburguesa BBQ con Tocino',
         price: 7.49,
-        img: 'https://picsum.photos/200/300?random=12',
+        img: 'https://cache-backend-mcd.mcdonaldscupones.com/media/image/product$kQX3BMhy/200/200/original?country=ar',
         description: 'Una hamburguesa de res con salsa BBQ, tocino, queso y aros de cebolla en un pan tostado.'
     },
     {
         id: 'ffprod-202408',
         name: 'Wrap de Pollo César',
         price: 5.99,
-        img: 'https://picsum.photos/200/300?random=14',
+        img: 'https://cache-backend-mcd.mcdonaldscupones.com/media/image/product$ktX156kS/200/200/original?country=pr',
         description: 'Pollo a la parrilla, lechuga romana, queso parmesano y aderezo César envueltos en una tortilla.'
     },
     {
         id: 'ffprod-202406',
         name: 'Sándwich de Pollo Picante',
         price: 6.49,
-        img: 'https://picsum.photos/200/300?random=9',
+        img: 'https://cache-backend-mcd.mcdonaldscupones.com/media/image/product$krXaagSr/200/200/original?country=ar',
         description: 'Un filete de pollo picante a la plancha con salsa BBQ en pan de campo.'
     },
 ];
@@ -62,57 +62,57 @@ const bebidas = [
         id: 'ffprod-12301',
         name: 'Coca-Cola',
         price: 4.99,
-        img: 'https://picsum.photos/200/300?random=21',
+        img: 'https://ams3.digitaloceanspaces.com/graffica/2023/02/la-ola-de-cocacola.png',
         description: 'Una bebida de cola clásica y refrescante.'
     },
     {
         id: 'ffprod-12302',
         name: 'Pepsi',
         price: 4.99,
-        img: 'https://picsum.photos/200/300?random=22',
+        img: 'https://fullstop360.com/blog/wp-content/uploads/2020/09/Chapter-five-reversing-colors.jpg',
         description: 'Una popular soda con sabor a cola.'
     },
     {
         id: 'ffprod-12303',
         name: 'Sprite',
         price: 4.99,
-        img: 'https://picsum.photos/200/300?random=23',
+        img: 'https://brandemia.org/contenido/subidas/2022/05/nueva-identidad-visual-de-sprite-2022.png',
         description: 'Una soda crujiente y refrescante con sabor a limón-lima.'
     },
     {
         id: 'ffprod-12304',
         name: 'Fanta Naranja',
         price: 4.99,
-        img: 'https://picsum.photos/200/300?random=25',
+        img: 'https://static.vecteezy.com/system/resources/previews/007/978/621/non_2x/fanta-popular-drink-brand-logo-vinnytsia-ukraine-may-16-202-free-vector.jpg',
         description: 'Una soda afrutada y burbujeante con sabor a naranja.'
     },
     {
         id: 'ffprod-12305',
         name: 'Jugo de Naranja',
         price: 2.99,
-        img: 'https://picsum.photos/200/300?random=30',
+        img: 'https://img.europapress.es/fotoweb/fotonoticia_20171106083335_1200.jpg',
         description: 'Un jugo de naranja exprimido, fresco y ácido.'
     },
     {
         id: 'ffprod-12306',
         name: 'Limonada',
         price: 3.49,
-        img: 'https://picsum.photos/200/300?random=27',
+        img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7vTVWFDF7yg8r4ouOdEnwYGQSZHj9qVJYrA&s',
         description: 'Una limonada clásica hecha con limones frescos.'
     },
     {
         id: 'ffprod-12307',
-        name: 'Agua',
-        price: 1.49,
-        img: 'https://picsum.photos/200/300?random=29',
-        description: 'Una botella de agua refrescante para saciar tu sed.'
+        name: 'Dr Pepper',
+        price: 1.99,
+        img: 'https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQ8IBL20hmuQ0XaKwfmfkbim5gaUg_2b7p4NODMaWqdGOziHbsv',
+        description: 'Una mezcla única de 23 sabores en una soda refrescante.'
     },
     {
         id: 'ffprod-12308',
-        name: 'Agua con gas',
+        name: 'Agua',
         price: 1.59,
-        img: 'https://picsum.photos/200/300?random=30',
-        description: 'Agua carbonatada hidratante y nutritiva.'
+        img: 'https://i.pinimg.com/originals/88/df/c0/88dfc0553c52065716ad616804d83bae.jpg',
+        description: 'Una botella de agua refrescante para saciar tu sed.'
     }
 ];
 
