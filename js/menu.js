@@ -247,6 +247,7 @@ function mostrarCarrito(){
     // si el carrito tiene ordenes, mostramos el total del pedido.
     if (totalCarrito > 0){
         seccionCarrito.classList.remove("hidden-box") //removemos la clase para que se vea la seccion en pantalla
+        cartButtonPopper()
         carritoTotalPrice.innerHTML = `<p>El total de su pedido es de: <b>$${totalCarrito.toFixed(2)}</b></p>`
     } else {
         // sino esta vacio, entonces escondemos la seccion
@@ -262,6 +263,22 @@ function eliminarDelCarrito(menuID) {
 
     localStorage.setItem('carrito', JSON.stringify(carritoEditado))
     mostrarCarrito()
+}
+
+// funcion que crea el boton para ir al carrito
+function cartButtonPopper(){
+    let containerCarrito = document.querySelector("#cart-button")
+    containerCarrito.classList.add("cart-button-container")
+    
+    let carritoButton = document.createElement("button")
+    carritoButton.innerHTML = '<i class="fa-solid fa-cart-shopping"> </i>'
+
+    carritoButton.addEventListener("click", () => {
+        let carritoSection = document.querySelector("#seccion-carrito")
+        carritoSection.scrollIntoView()
+    })
+
+    containerCarrito.replaceChildren(carritoButton)
 }
 
 /////////// dark mode ////////////////

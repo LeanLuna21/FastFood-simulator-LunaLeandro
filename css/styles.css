@@ -94,6 +94,9 @@
 }
 
 /* css headings & carrito */
+#seccion-carrito {
+  padding-top: 15px;
+}
 #contenedor-pedidos {
   display: grid;
   grid-template-columns: 1fr;
@@ -196,6 +199,24 @@
     width: 20%;
   }
 } 
+
+.cart-button-container{
+  position: fixed;
+  right: 3%;
+  bottom: 10%;
+}
+
+.cart-button-container button{
+  background-color: rgb(255, 245, 167, 0.7);
+  padding: 0.8rem 1rem;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.cart-button-container button:hover{
+  background-color: rgba(246, 225, 62, 0.752);
+  transition: 0.3s;
+}
 
 /* css footer */
 
