@@ -248,7 +248,12 @@ function mostrarCarrito(){
     if (totalCarrito > 0){
         seccionCarrito.classList.remove("hidden-box") //removemos la clase para que se vea la seccion en pantalla
         cartButtonPopper()
-        carritoTotalPrice.innerHTML = `<p>El total de su pedido es de: <b>$${totalCarrito.toFixed(2)}</b></p>`
+        carritoTotalPrice.innerHTML = `
+            <p>El total de su pedido es de: <b>$${totalCarrito.toFixed(2)}</b></p>
+            <a><button class="btn btn-outline-warning btn-sm m-2">Realizar pedido <i class="fa-brands fa-whatsapp"></i></button></a>`
+        let boton = carritoTotalPrice.lastElementChild
+        boton.setAttribute("href","https://wa.me/FastFeedOrderBot")
+        
     } else {
         // sino esta vacio, entonces escondemos la seccion
         seccionCarrito.classList.add("hidden-box")

@@ -4,6 +4,9 @@
   box-sizing: border-box;
 }
 
+body{
+  background-color: #ffb327;
+}
 #mainCarousel{
   margin-top: 5rem;
   min-height: 20vh;
@@ -153,6 +156,9 @@
   border-radius: 0.8rem;
   box-shadow: 10px 10px 10px 0 rgba(0, 0, 0, 0.1);
   color: rgb(226, 243, 100);
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
   flex-grow: 1;
 }
 .contenedor-importe-total{
@@ -160,6 +166,10 @@
 }
 .contenedor-importe-total p{
   margin: 0;
+}
+
+.contenedor-importe-total button{
+  border-radius: 0.8rem;
 }
 .eliminar-orden{
   min-width: 25%
@@ -170,7 +180,7 @@
   box-shadow: 1px 1px 5px #6f1414;
 }
 .subtitle {
-  background-color: rgba(246, 225, 62, 0.752);
+  background-color: rgba(246, 223, 49, 0.809);
   color: rgb(5, 5, 5);
 }
 
@@ -207,7 +217,7 @@
 }
 
 .cart-button-container button{
-  background-color: rgb(255, 245, 167, 0.7);
+  background-color: rgba(255, 245, 167, 0.819);
   padding: 0.8rem 1rem;
   border-radius: 50%;
   cursor: pointer;
@@ -238,6 +248,6 @@ body {
 }
 
 body.dark-mode {
-  background-color: #322708;
+  background-color: #50390d;
 }
 
