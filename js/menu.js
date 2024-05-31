@@ -116,16 +116,19 @@ const bebidas = [
     }
 ];
 
+// juntamos los elementos de los dos array en uno (usando spread operator)
+const menu = [...comidas, ...bebidas]
+
 // funciones que corren al iniciar
-mostrarMenu(comidas, '#menu-comidas') 
-mostrarMenu(bebidas, '#menu-bebidas')  
+mostrarMenu(comidas, '#menu-comidas')
+mostrarMenu(bebidas, '#menu-bebidas')
 buttonAddEventListener()
 mostrarCarrito()
 
 // para no repetir codigo, creamos una fx que recibe un array(que luego iteraremos para mostrar en pantalla) y la seccion donde se mostraran esos elementos
 function mostrarMenu(array, sectionID) {
-    let section = document.querySelector(sectionID);
-    let sectionHTML = "";
+    let section = document.querySelector(sectionID)
+    let sectionHTML = ""
 
     // iteramos el array de comidas o bebidas y creamos el html para cada opcion del menu
     for (let option of array) {
@@ -142,14 +145,14 @@ function mostrarMenu(array, sectionID) {
             </div>
           </div>
         </div>
-        `;
+        `
     }
     // añadimos los objetos a la seccion
     section.innerHTML = sectionHTML;
 }
 
 // funcion que le da a los botones el evento on-click para añadirlos al pedido.
-function buttonAddEventListener(){
+function buttonAddEventListener() {
     // traemos todos los botones creados en la fx anterior
     let botonesAdd = document.querySelectorAll(".add-to-cart")
 
@@ -169,24 +172,22 @@ function buttonAddEventListener(){
 function addToCart(menuID) {
     // creamos un carrito que contendra lo guardado en localStorage o si no, un array vacio
     let carrito = JSON.parse(localStorage.getItem('carrito')) || []
-    
-    // usamos HOF .find para traer el objeto de nuestro array de productos que coincida con nuestro array
-    let optionMenu = comidas.find(option => option.id === menuID) || bebidas.find(option => option.id === menuID)
+
+    // usamos HOF .find para traer el objeto de nuestro array que coincida con el id que tenemos 
+    let optionMenu = menu.find(option => option.id === menuID)
 
     // y buscamos si ese elemento tambien ya esta en nuestro carrito
     let ordenesEnCarrito = carrito.find(orden => orden.id === menuID)
 
     // si ya existe
-    if (ordenesEnCarrito){
+    if (ordenesEnCarrito) {
         // le sumamos 1 a la cantidad y calculamos el precio total
         ordenesEnCarrito.quantity += 1
         ordenesEnCarrito.totalPrice = ordenesEnCarrito.quantity * ordenesEnCarrito.price
     } else {
-        // pusheamos el objeto optionMenu que trajimos antes
+        // sino pusheamos el objeto optionMenu que trajimos antes al carrito (le agregamos prop cantidad, y $ total)
         carrito.push({
-            id: menuID,
-            name: optionMenu.name,
-            price: optionMenu.price,
+            ...optionMenu,
             quantity: 1,
             totalPrice: optionMenu.price
         })
@@ -197,7 +198,7 @@ function addToCart(menuID) {
     mostrarCarrito();
 }
 
-function mostrarCarrito(){
+function mostrarCarrito() {
     let carrito = JSON.parse(localStorage.getItem('carrito')) || []
 
     // traemos el contenedor donde iran las ordenes
@@ -206,7 +207,7 @@ function mostrarCarrito(){
     pedidoHTML = ""
     // cada pedido agragado al carrito
     for (let pedido of carrito) {
-    
+
         // le damos la estructura html
         pedidoHTML += `
         <div class="lista-pedido" id=${pedido.id}>
@@ -225,17 +226,17 @@ function mostrarCarrito(){
 
         `
     }
-    
+
     // agregamos la estructura creada a la seccion contenedora
     pedidosSeccion.innerHTML = pedidoHTML
 
     // agregar funcionalidad para eliminar del carrito
     document.querySelectorAll('.eliminar-orden').forEach(boton => {
         boton.addEventListener('click', () => {
-          let menuID = boton.getAttribute('data-id')
-          eliminarDelCarrito(menuID) //llamamos a la fx elimiar declarada abajo
+            let menuID = boton.getAttribute('data-id')
+            eliminarDelCarrito(menuID) //llamamos a la fx elimiar declarada abajo
         });
-      });
+    });
 
     // HOF .reduce para sumar los totales de cada pedido
     let totalCarrito = carrito.reduce((acc, pedido) => acc + pedido.totalPrice, 0);
@@ -245,15 +246,15 @@ function mostrarCarrito(){
     let carritoTotalPrice = document.querySelector(".contenedor-importe-total")
 
     // si el carrito tiene ordenes, mostramos el total del pedido.
-    if (totalCarrito > 0){
+    if (totalCarrito > 0) {
         seccionCarrito.classList.remove("hidden-box") //removemos la clase para que se vea la seccion en pantalla
         cartButtonPopper()
         carritoTotalPrice.innerHTML = `
             <p>El total de su pedido es de: <b>$${totalCarrito.toFixed(2)}</b></p>
             <a><button class="btn btn-outline-warning btn-sm m-2">Realizar pedido <i class="fa-brands fa-whatsapp"></i></button></a>`
         let boton = carritoTotalPrice.lastElementChild
-        boton.setAttribute("href","https://wa.me/FastFeedOrderBot")
-        
+        boton.setAttribute("href", "https://wa.me/FastFeedOrderBot")
+
     } else {
         // sino esta vacio, entonces escondemos la seccion
         seccionCarrito.classList.add("hidden-box")
@@ -263,18 +264,28 @@ function mostrarCarrito(){
 
 function eliminarDelCarrito(menuID) {
     let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-    // HOF .filter() para mantener los elementos que NO coincidan con el ID que le pasamos
-    let carritoEditado = carrito.filter(orden => orden.id !== menuID)
+    let carritoEditado
+    let menuOptionToDelete = carrito.find(orden => orden.id === menuID)
+    
+    // si del objeto a eliminar, la cantidad es mayor a uno, restamos 1 del carrito y actualizamos el precioTotal de la orden
+    if (menuOptionToDelete.quantity > 1) {
+        menuOptionToDelete.quantity -= 1
+        menuOptionToDelete.totalPrice = menuOptionToDelete.quantity * menuOptionToDelete.price
+        carritoEditado = carrito
+    } else {
+        // sino HOF .filter() para mantener los elementos que NO coincidan con el ID que le pasamos
+        carritoEditado = carrito.filter(orden => orden.id !== menuID)
+    }
 
     localStorage.setItem('carrito', JSON.stringify(carritoEditado))
     mostrarCarrito()
 }
 
-// funcion que crea el boton para ir al carrito
-function cartButtonPopper(){
+// funcion que crea el boton para ir al carrito en el div del html correspondiente
+function cartButtonPopper() {
     let containerCarrito = document.querySelector("#cart-button")
     containerCarrito.classList.add("cart-button-container")
-    
+
     let carritoButton = document.createElement("button")
     carritoButton.innerHTML = '<i class="fa-solid fa-cart-shopping"> </i>'
 
@@ -289,51 +300,39 @@ function cartButtonPopper(){
 /////////// dark mode ////////////////
 
 // elementos que van a cambiar con el toggler
-let btnColorMode = document.querySelector("#color-mode");
-let btnColorIcon = document.querySelector("#color-mode-icon");
+let btnColorMode = document.querySelector("#color-mode")
+let btnColorIcon = document.querySelector("#color-mode-icon")
 let nav = document.querySelector(".navbar")
 
 // funcion que evalua el tema al activar el boton toggler
-function setColorMode(){
+function setColorMode() {
     let colorMode = localStorage.getItem('theme')
-
-    if (colorMode == 'light'){
-        setDarkmode()
-    } else if (colorMode == 'dark'){
-        setLightmode()
-    }
+    colorMode == 'light' ? setDarkmode() : setLightmode()
 }
 
 // setea el local storage en "dark" y hace los cambios del modo al html 
-function setDarkmode(){
-    localStorage.setItem('theme','dark')
+function setDarkmode() {
+    localStorage.setItem('theme', 'dark')
     document.body.classList.add("dark-mode")
-    btnColorIcon.classList.replace("fa-lightbulb","fa-moon")
-    nav.classList.replace("navbar-light","navbar-dark")
-    nav.classList.replace("bg-light","bg-dark")
-
+    btnColorIcon.classList.replace("fa-lightbulb", "fa-moon")
+    nav.classList.replace("navbar-light", "navbar-dark")
+    nav.classList.replace("bg-light", "bg-dark")
 }
 
 // setea el local storage en "light" y hace los cambios del modo al html 
-function setLightmode(){
+function setLightmode() {
     document.body.classList.remove("dark-mode")
-    localStorage.setItem('theme','light')
-    btnColorIcon.classList.replace("fa-moon","fa-lightbulb")
-    nav.classList.replace("navbar-dark","navbar-light")
-    nav.classList.replace("bg-dark","bg-light")
-
+    localStorage.setItem('theme', 'light')
+    btnColorIcon.classList.replace("fa-moon", "fa-lightbulb")
+    nav.classList.replace("navbar-dark", "navbar-light")
+    nav.classList.replace("bg-dark", "bg-light")
 }
 
 // dark mode toggler event listener
-btnColorMode.addEventListener("click",() => {
-    setColorMode() 
+btnColorMode.addEventListener("click", () => {
+    setColorMode()
 })
 
 // evalua si hay un tema guardado en el localstorage para que la pag recargue en el tema que estaba
 let colorMode = localStorage.getItem('theme')
-if (!colorMode) {
-    setLightmode()
-} else if (colorMode == "dark"){
-    setDarkmode()
-}
-
+!colorMode ? setLightmode() : colorMode == "dark" ? setDarkmode() : "";

@@ -167,7 +167,9 @@ body{
 .contenedor-importe-total p{
   margin: 0;
 }
-
+.contenedor-importe-total a{
+  line-height: 50%;
+}
 .contenedor-importe-total button{
   border-radius: 0.8rem;
 }
