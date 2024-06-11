@@ -18,6 +18,42 @@ body{
 }
 
 /* css menu sections */
+#comidas-title-bar,
+#bebidas-title-bar,
+.subtitle,
+.contenedor-importe-total {
+  font-size: clamp(1rem, 0.3869rem + 2.6025vw, 3rem);
+  margin-top: 4rem;
+  background-color: rgba(0, 0, 0, 0.752);
+  padding: 1rem;
+  border-radius: 0.8rem;
+  box-shadow: 10px 10px 10px 0 rgba(0, 0, 0, 0.1);
+  color: #e2f364;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.title{
+  margin-left: 10%;
+}
+.search-bar{
+  font-size: clamp(0.875rem, 0.7679rem + 0.5714vw, 1rem);
+  width: 40%;
+  text-align: center;
+  border: 2px solid #ffe54f;
+  border-radius: 0.6rem;
+  background-color: #ffb327;
+  background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Magnifying_glass_icon.svg/490px-Magnifying_glass_icon.svg.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: right;
+  background-blend-mode:overlay;
+}
+.search-bar::placeholder{
+  color: #414141fc;
+  text-align: center;
+}
+
 #menu-comidas, #menu-bebidas{
   margin-top: 2rem;
   padding-top: 1rem;
@@ -34,7 +70,7 @@ body{
 .menu-card {
   display: flex;
   flex-direction: column;
-  background-color: rgb(255, 229, 79);
+  background-color: #ffe54f;
   border-radius: 0.8rem;
   overflow: hidden;
 }
@@ -146,21 +182,6 @@ body{
   justify-content: space-between;
 }
 
-.title,
-.subtitle,
-.contenedor-importe-total {
-  font-size: clamp(1rem, 0.3869rem + 2.6025vw, 3rem);
-  margin-top: 4rem;
-  background-color: rgba(0, 0, 0, 0.752);
-  padding: 1rem;
-  border-radius: 0.8rem;
-  box-shadow: 10px 10px 10px 0 rgba(0, 0, 0, 0.1);
-  color: rgb(226, 243, 100);
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  flex-grow: 1;
-}
 .contenedor-importe-total{
   margin-bottom: 4rem;
 }
@@ -193,6 +214,17 @@ body{
 
 
 @media (max-width:660px) {
+  #comidas-title-bar, #bebidas-title-bar {
+    flex-wrap:wrap;
+    justify-content: center;
+  }
+  .title{
+    margin-left: 0;
+  }
+  .search-bar{
+    width: 90%;
+    margin:0
+  }
   #contenedor-pedidos{
     padding: 0.5rem;
   }
@@ -215,7 +247,7 @@ body{
 .cart-button-container{
   position: fixed;
   right: 3%;
-  bottom: 10%;
+  bottom: 12%;
 }
 
 .cart-button-container button{
@@ -223,6 +255,7 @@ body{
   padding: 0.8rem 1rem;
   border-radius: 50%;
   cursor: pointer;
+  border: 0.5px solid #191919;
 }
 
 .cart-button-container button:hover{

@@ -120,17 +120,67 @@ const bebidas = [
 const menu = [...comidas, ...bebidas]
 
 // funciones que corren al iniciar
-mostrarMenu(comidas, '#menu-comidas')
-mostrarMenu(bebidas, '#menu-bebidas')
-buttonAddEventListener()
-mostrarCarrito()
+cargarSeccionMenu(comidas, "#comidas") //llena la seccion del menu comidas con las opciones
+cargarSeccionMenu(bebidas, "#bebidas") //llena la seccion del menu bebidas con las opciones
+buttonAddEventListener()               //asigna a botones el avento de agregar al carro
+mostrarCarrito()                       //muestra el carrito si ya existe el dato en el localStorage
 
-// para no repetir codigo, creamos una fx que recibe un array(que luego iteraremos para mostrar en pantalla) y la seccion donde se mostraran esos elementos
-function mostrarMenu(array, sectionID) {
-    let section = document.querySelector(sectionID)
+// para no repetir codigo, creamos una fx que recibe un array y la seccion donde se mostrará ese array
+function cargarSeccionMenu(array, section){
+    // traemos la seccion que se va a llenar
+    let sectionMenu = document.querySelector(section)
+    // le quitamos el hash para luego utilizar el nombre del array como variable
+    let nombreArray = section.slice(1)
+
+    // creo el div del titulo y la search-bar de la seccion
+    let sectionTitleBar = document.createElement("div")
+    sectionTitleBar.setAttribute("id",`${nombreArray}-title-bar`)
+    // creamos el titulo
+    let sectionTitle = document.createElement("h1")
+    sectionTitle.classList.add("title")
+    sectionTitle.textContent = `Elegi tus ${nombreArray}`
+    // creamos la searchbar
+    let inputSearchBar = document.createElement("input")
+    inputSearchBar.setAttribute("id",`${nombreArray}-search-bar`)
+    inputSearchBar.setAttribute("placeholder",`Search`)
+    inputSearchBar.classList.add("search-bar")
+
+    // apendeamos ambos a la barra y apendeamos la barra a la seccion
+    sectionTitleBar.append(sectionTitle,inputSearchBar)
+    sectionMenu.append(sectionTitleBar)
+
+    // creamos el div donde iran las opciones de los menú
+    let menuOptions = document.createElement("div")
+    menuOptions.setAttribute("id",`menu-${nombreArray}`)
+    menuOptions.classList.add("menu-options")
+
+    // llamamos a la fx para mostrar las opciones del menu (inicialmente se muestran todas)
+    mostrarMenu(array, menuOptions)
+
+    // asignamos un eventlistener al input de busqueda
+    inputSearchBar.addEventListener("input", (event) => {
+        let userInput = event.target.value.toLowerCase()
+
+        const filterItems = (menuOptions) => {
+            return menuOptions.filter(option => option.name.toLowerCase().includes(userInput));
+        };
+
+        // filtramos el array que llega por parametro, con lo que indique el usuario
+        newArray = filterItems(array)
+        // llamamos a la fx mostrarMenu para actualizar el dom con el nuevo array filtrado
+        mostrarMenu(newArray, menuOptions)
+    })
+    
+    // por ultimo agregamos el container a la seccion
+    sectionMenu.append(menuOptions)
+}
+
+// funcion que actualiza el DOM con los elementos del array que pasemos por parametro en el div que pasemos por parametro
+function mostrarMenu(array, container){
+   
     let sectionHTML = ""
 
-    // iteramos el array de comidas o bebidas y creamos el html para cada opcion del menu
+    // iteramos el array de comidas o bebidas que llega por parametro y creamos el html para cada opcion del menu
     for (let option of array) {
         // += para que no se reescriba el contenido del html, sino que se sume
         sectionHTML += `
@@ -148,7 +198,10 @@ function mostrarMenu(array, sectionID) {
         `
     }
     // añadimos los objetos a la seccion
-    section.innerHTML = sectionHTML;
+    container.innerHTML = sectionHTML
+
+    // reasignamos event listeners una vez actualizado el DOM
+    buttonAddEventListener();
 }
 
 // funcion que le da a los botones el evento on-click para añadirlos al pedido.

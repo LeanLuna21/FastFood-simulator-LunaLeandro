@@ -10,6 +10,8 @@
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="./css/styles.css">
     <link rel="shortcut icon" href="./assets/icons/hamburguesa.png" type="image/x-icon">
+    <!-- toastify styles -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 </head>
 
 <body>
@@ -86,15 +88,14 @@
                 </button>
             </section> <!-- fin carousel -->
 
-            <!-- menu comidas (js) -->
             <div id="start-order"> </div>
-            <h1 class="title">Elegi tu comida:</h1>
-            <section id="menu-comidas" class="menu-options">
+
+            <!-- menu comidas (js) -->
+            <section id="comidas">  
             </section>
 
             <!-- menu bebidas (js) -->
-            <h1 class="title">Elegi tu bebida:</h1>
-            <section id="menu-bebidas" class="menu-options">
+            <section id="bebidas">   
             </section>
 
             <!-- carrito (js) -->
@@ -114,7 +115,7 @@
                 </section>
                 <!-- boton carrito (js) -->
                 <div id="cart-button">
-                    
+
                 </div>
             </section>
 
@@ -202,8 +203,12 @@
     <!-- icons script -->
     <script src="https://kit.fontawesome.com/1dcfa36bb4.js" crossorigin="anonymous"></script>
 
+    <!-- toastify script -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
     <!-- my script -->
     <script src="./js/menu.js"></script>
+    <script src="./js/botonAgregar.js"></script>
 
 </body>
 
