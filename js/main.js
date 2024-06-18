@@ -23,6 +23,7 @@ fetch(url)
         botonAgregarEventListeners()
         //mostramos el carrito si es que ya existe
         mostrarCarrito()
+        evaluarHistorial()
     })
     .catch((err) => console.log(err))
 
@@ -123,11 +124,11 @@ function botonAgregarEventListeners() {
     botonesAdd.forEach(boton => {
         // cuando el usuario clickee, se añade la opcion a la orden
         boton.removeEventListener("click", eventoAgregarAlCarrito),
-        boton.addEventListener("click", eventoAgregarAlCarrito)
+            boton.addEventListener("click", eventoAgregarAlCarrito)
     })
 }
 
-function eventoAgregarAlCarrito(event){
+function eventoAgregarAlCarrito(event) {
     // recupera el id de la opcion a donde se dispare el evento
     const optionMenuID = event.target.getAttribute("data-id")
     // lo agregamos al carrito
@@ -147,7 +148,7 @@ function eventoAgregarAlCarrito(event){
             'font-size': '12px',
             'font-weight': 600,
             padding: '8px 15px',
-            color:"black",
+            color: "black",
             background: "linear-gradient(to right,  hsl(44deg 100% 56%) 0%, hsl(46deg 100% 71%) 40%,hsl(53deg 100% 83%) 100%)",
             border: '0.5px solid black',
             'border-radius': '0.8rem',
@@ -161,7 +162,7 @@ function eventoAgregarAlCarrito(event){
 function addToCart(menuID) {
     // creamos un carrito que contendra lo guardado en localStorage o si no, un array vacio
     let carrito = JSON.parse(localStorage.getItem('carrito')) || []
-    
+
     // usamos HOF .find para traer el objeto de nuestro array que coincida con el id que tenemos
     let optionMenu = menu.find(option => option.id === menuID)
 
@@ -238,7 +239,7 @@ function mostrarCarrito() {
                     'font-size': '12px',
                     'font-weight': 600,
                     padding: '8px 15px',
-                    color:"white",
+                    color: "white",
                     background: "linear-gradient(to top, hsl(0deg 79% 36%) 10%, hsl(22deg 81% 37%) 63%, hsl(36deg 85% 37%) 99%",
                     border: '0.5px solid black',
                     'border-radius': '0.8rem',
@@ -263,9 +264,17 @@ function mostrarCarrito() {
         cartButtonPopper()
         carritoTotalPrice.innerHTML = `
         <p>El total de su pedido es de: <b>$${totalCarrito.toFixed(2)}</b></p>
-        <a><button class="btn btn-outline-warning btn-sm m-2">Realizar pedido <i class="fa-brands fa-whatsapp"></i></button></a>`
-        let boton = carritoTotalPrice.lastElementChild
-        boton.setAttribute("href", "https://wa.me/FastFeedOrderBot")
+        <a><button>Realizar pedido </button></a>`
+        let linkBoton = carritoTotalPrice.lastElementChild
+        // linkBoton.setAttribute("href", "#")
+        linkBoton.firstChild.id = "btn-realizar-pedido"
+        linkBoton.firstChild.className = "btn btn-outline-warning btn-sm m-2"
+        let icon = document.createElement("i")
+        icon.className = "fa-brands fa-whatsapp"
+        linkBoton.firstChild.appendChild(icon)
+        linkBoton.firstChild.addEventListener("click", addOrderToHistory)
+        linkBoton.firstChild.addEventListener("click", showAlert)
+
 
     } else {
         // sino esta vacio, entonces escondemos la seccion
@@ -309,3 +318,52 @@ function cartButtonPopper() {
     containerCarrito.replaceChildren(carritoButton)
 }
 
+// funcion que evalua si existe "historial" en el localStorage para habilitar la pestaña de "mis pedidos"
+function evaluarHistorial() {
+    let historial = JSON.parse(localStorage.getItem('historialPedidos')) || []
+    let pestaniaHistorial = document.getElementById("historial-pedidos")
+
+    if (historial.length > 0) {
+        pestaniaHistorial.classList.remove("disabled")
+    }
+}
+
+// funcion que guarda las ordenes realizadas en el historial de pedidos del localstorage
+function addOrderToHistory() {
+    let carrito = JSON.parse(localStorage.getItem('carrito'))
+
+    let historial = JSON.parse(localStorage.getItem('historialPedidos')) || []
+    let count = historial.length
+
+    //creamos un array
+    let pedidoAgregado = []
+    // por cada orden del pedido
+    for (orden of carrito) {
+        const { category, descritpion, id, img, name, price, quantity, totalPrice } = orden
+        // guardamos nombre, precio, cantidad y total
+        let pedido = {
+            opcion: name,
+            precio: price,
+            cantidad: quantity,
+            total: totalPrice
+        }
+        // y se lo pusheamos al array
+        pedidoAgregado.push(pedido)
+    }
+    // para luego guardarlo en el historial
+    historial.push({
+        numPedido: ++count,
+        ordenes: pedidoAgregado
+    })
+
+    // almacenamos el objeto en el localstorage
+    localStorage.setItem('historialPedidos', JSON.stringify(historial));
+    // habilitamos la pestaña para ver el historial
+    evaluarHistorial()
+}
+
+function showAlert() {
+    setTimeout(() => {swal("Pedido recibido. Recibirá un mensaje de wpp a la brevedad.")}, 2000)
+    swal("Su pedido esta siendo procesado...")
+    
+}

@@ -136,7 +136,7 @@ body{
 #seccion-carrito {
   padding-top: 15px;
 }
-#contenedor-pedidos {
+#contenedor-pedidos, #orders-history {
   display: grid;
   grid-template-columns: 1fr;
   gap: 20px;
@@ -144,7 +144,7 @@ body{
   justify-content: center;
 }
 
-#contenedor-pedidos .lista-pedido {
+#contenedor-pedidos .lista-pedido, #orders-history .lista-pedido {
   background-color: rgb(255, 245, 167);
   list-style-type: none;
   padding: 1rem;
@@ -284,5 +284,20 @@ body {
 
 body.dark-mode {
   background-color: #50390d;
+}
+
+/* pestaña historial */
+.history-title-container{
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 55%;
+}
+
+.history-title-container button{
+  margin: 12px;
+  padding: 5px 20px;
+  border-radius: 0.6rem;
+  font-size: clamp(0.2rem, 0.4869rem + 0.8025vw, 1rem);
 }
 
